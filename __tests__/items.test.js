@@ -41,7 +41,7 @@ describe('items', () => {
   afterAll(() => {
     pool.end();
   });
-  it.skip('POST /api/v1/items creates a new shopping item with the current user', async () => {
+  it('POST /api/v1/items creates a new shopping item with the current user', async () => {
     const [agent, user] = await registerAndLogin();
     const newItem = { description: 'eggs', qty: 12 };
     const resp = await agent.post('/api/v1/items').send(newItem);
@@ -75,12 +75,12 @@ describe('items', () => {
     expect(resp.body).toEqual([user1Item]);
   });
 
-  it.skip('GET /api/v1/items should return a 401 if not authenticated', async () => {
-    const resp = await request(app).get('/api/v1/items');
+  it('GET /api/v1/items should return a 401 if not authenticated', async () => {
+    const resp = await request(app).get('/api/v1/items'); //same as getAll controller
     expect(resp.status).toEqual(401);
   });
 
-  it.skip('UPDATE /api/v1/items/:id should update an item', async () => {
+  it('UPDATE /api/v1/items/:id should update an item', async () => {
     // create a user
     const [agent, user] = await registerAndLogin();
     const item = await Item.insert({
@@ -95,7 +95,7 @@ describe('items', () => {
     expect(resp.body).toEqual({ ...item, bought: true });
   });
 
-  it.skip('UPDATE /api/v1/items/:id should 403 for invalid users', async () => {
+  it('UPDATE /api/v1/items/:id should 403 for invalid users', async () => {
     // create a user
     const [agent] = await registerAndLogin();
     // create a second user
@@ -111,7 +111,7 @@ describe('items', () => {
     expect(resp.status).toBe(403);
   });
 
-  it.skip('DELETE /api/v1/items/:id should delete items for valid user', async () => {
+  it('DELETE /api/v1/items/:id should delete items for valid user', async () => {
     const [agent, user] = await registerAndLogin();
     const item = await Item.insert({
       description: 'apples',
