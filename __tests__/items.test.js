@@ -76,7 +76,7 @@ describe('items', () => {
   });
 
   it('GET /api/v1/items should return a 401 if not authenticated', async () => {
-    const resp = await request(app).get('/api/v1/items');
+    const resp = await request(app).get('/api/v1/items'); //same as getAll controller
     expect(resp.status).toEqual(401);
   });
 
